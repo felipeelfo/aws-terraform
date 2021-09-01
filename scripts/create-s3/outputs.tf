@@ -1,15 +1,15 @@
 output "Bucket" {
-  value = aws_s3_bucket.b.id
-}
+  value = module.create-s3.Bucket
+  }
 output "Região" {
-  value = aws_s3_bucket.b.region
+  value = module.create-s3.Região
 }
 output "IAM" {
-  value = aws_iam_user.lb.name
+  value = module.create-s3.IAM
 }
 output "Access_Key" {
-    value = aws_iam_access_key.lb.idy
+    value = module.create-s3.Access_Key
 }
 output "Secret_Key" {
-  value = aws_iam_access_key.lb.secret
+  value = module.create-s3.Secret_Key
 }

@@ -4,5 +4,5 @@ provider "aws" {
 
 module "create-s3" {
   source = "../../services/aws-s3"
-  bucket_name = "${var.bucket_name}"  
+  bucket_name = var.bucket_name
 }

@@ -1,12 +1,11 @@
 #Criando Bucket S3
-resource "aws_s3_bucket" "b" {
-    bucket = var.name_bucket
-    acl = private
-    region = us-east-1 
+resource "aws_s3_bucket" "aws_s3" {
+    bucket = var.bucket_name
+    acl = "private"    
 }
 #Criando User IAM
 resource "aws_iam_user" "lb" {
-  name = "s3-${var.name_bucket}"
+  name = "s3-${var.bucket_name}"
   path = "/system/"
 }
 #Criando Access Key
@@ -15,7 +14,7 @@ resource "aws_iam_access_key" "lb" {
 }
 #Criando Policy de Acesso ao Bucket
 resource "aws_iam_user_policy" "lb_ro" {
-  name = "policy-s3-${var.name_bucket}"
+  name = "policy-s3-${var.bucket_name}"
   user = aws_iam_user.lb.name
 
   policy = <<EOF
@@ -35,8 +34,8 @@ resource "aws_iam_user_policy" "lb_ro" {
       ],
       "Effect": "Allow",
       "Resource": [
-      "${aws_s3_bucket.b.arn}",
-      "${aws_s3_bucket.b.arn}/*"
+      "${aws_s3_bucket.aws_s3.arn}",
+      "${aws_s3_bucket.aws_s3.arn}/*"
       ]
     }
   ]
